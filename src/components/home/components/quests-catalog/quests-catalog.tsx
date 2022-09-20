@@ -19,7 +19,6 @@ const QuestsCatalog = () => {
 
   const currentType = useAppSelector((state) => state.currentQuestType);
   const questList:QuestListType = useAppSelector((state) => state.questList);
-  console.log(questList);
   const dispatch = useAppDispatch();
   const filteredQuestList = () => {
     if (currentType === 'all quests') {

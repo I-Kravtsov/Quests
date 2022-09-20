@@ -3,7 +3,8 @@ import { ReactComponent as IconClose } from '../../../../assets/img/icon-close.s
 import { useRef, FormEvent } from 'react';
 import { useAppDispatch } from '../../../../hooks';
 import { OrderType } from '../../../../types/types';
-import { sendOrder, setIsBookingModalOpened } from '../../../../store/action';
+import { setIsBookingModalOpened } from '../../../../store/action';
+import { fetchSendOrderAction } from '../../../../store/api-action';
 
 
 const BookingModal = () => {
@@ -15,7 +16,7 @@ const BookingModal = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit = (formData: OrderType) => {
-    dispatch(sendOrder(formData));
+    dispatch(fetchSendOrderAction(formData));
     dispatch(setIsBookingModalOpened(false));
   };
 

@@ -22,7 +22,7 @@ export const fetchQuestsListAction = createAsyncThunk(
   'data/fetchqestsList',
   async () => {
     try {
-      const {data} = await api.get<QuestListType>('/quests');
+      const {data} = await api.get<QuestListType>(APIRoute.questList);
       store.dispatch(loadQuests(data));
     } catch (error) {
       errorHandle(error);
@@ -34,7 +34,7 @@ export const fetchQuestAction = createAsyncThunk(
   'data/fetchqest',
   async (filmId: number) => {
     try {
-      const {data} = await api.get<QuestCardType>(`/quests/${filmId}`);
+      const {data} = await api.get<QuestCardType>(`${APIRoute.quest}/${filmId}`);
       store.dispatch(loadQuest(data));
     } catch (error) {
       errorHandle(error);
@@ -44,12 +44,10 @@ export const fetchQuestAction = createAsyncThunk(
 
 export const fetchSendOrderAction = createAsyncThunk(
   'data/fetchSendOrder',
-  async (order) => {
+  async ({name, peopleCount, phone, isLegal}: OrderType ) => {
     try {
-      console.log('ee')
-      const {data} = await api.post<OrderType>(`${APIRoute.orders}`);
+      const {data} = await api.post<OrderType>(APIRoute.orders, {name, peopleCount, phone, isLegal});
       store.dispatch(sendOrder(data));
-      console.log('dd');
     } catch (error) {
       errorHandle(error);
     }
